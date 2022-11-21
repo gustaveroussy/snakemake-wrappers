@@ -118,9 +118,9 @@ done
 # Activate conda
 message CMD "conda_activate ${CONDA_ENV_PATH}"
 conda_activate "${CONDA_ENV_PATH}" && message INFO "Conda loaded" || error_handling "${LINENO}" 1 "Could not activate conda environment"
-
+snakemake --version
 # Launch snakemake
-BASE_CMD="snakemake -s ${SNAKEFILE_PATH} --profile ${SNAKEMAKE_PROFILE_PATH}/${PROFILE} ${SNAKE_ARGS[*]}"
+BASE_CMD="/mnt/beegfs/pipelines/snakemake-wrappers/bigr_pipelines/common/env2/bin/snakemake -s ${SNAKEFILE_PATH} --profile ${SNAKEMAKE_PROFILE_PATH}/${PROFILE} ${SNAKE_ARGS[*]}"
 if [ "${SUMMARY}" != "" ]; then
   SUMMARY_CMD="${BASE_CMD} --summary > ${SUMMARY}"
   message CMD "${SUMMARY_CMD}"

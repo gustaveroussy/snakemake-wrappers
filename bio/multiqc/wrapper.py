@@ -17,11 +17,11 @@ output_name = path.basename(snakemake.output[0])
 log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 
 shell(
-    "multiqc"
+    "/home/svc_hpc_biopath@intra.igr.fr/.local/bin/multiqc"
     " {snakemake.params}"
     " --force"
     " -o {output_dir}"
-    " -n {output_name}"
-    " {snakemake.input}"
+    " -n {output_name} "
+    " {snakemake.input} *xml InterOp/*"
     " {log}"
 )

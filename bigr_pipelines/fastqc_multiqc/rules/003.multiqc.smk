@@ -100,6 +100,6 @@ rule unzip_stats:
     group:
         "stats_inclusion"
     shell:
-        'unzip -n -d "${{PWD}}" '
-        'input/*/archive/*/unaligned/Stats/Stats.json.zip '
+        'for i in $(ls input/*/archive/*/*xml.zip input/*/archive/*/InterOp.zip input/*/archive/*/unaligned/Stats/Stats.json.zip); do unzip -n -d "${{PWD}}"  $i ; done'
         '> {log} 2>&1'
+        
