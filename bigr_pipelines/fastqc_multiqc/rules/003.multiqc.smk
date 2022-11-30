@@ -30,8 +30,8 @@ rule multiqc:
         directory("multiqc/multiqc_data")
     threads: 1
     resources:
-        mem_mb=get_2gb_per_attempt,
-        time_min=get_1h_per_attempt,
+        mem_mb = lambda wildcards, attempt: min(4192 + attempt * 512, 4192*2),
+        time_min = 60,
         tmpdir="tmp"
     params:
         "--flat"
@@ -92,8 +92,8 @@ rule unzip_stats:
         temp("Stats.json")
     threads: 1
     resources:
-        mem_mb=get_768mb_per_attempt,
-        time_min=get_15min_per_attempt,
+        mem_mb = lambda wildcards, attempt: min(2000 + attempt * 512, 2000*2),
+        time_min = 45,
         tmpdir="tmp"
     log:
         "logs/003.unzipping.log"
