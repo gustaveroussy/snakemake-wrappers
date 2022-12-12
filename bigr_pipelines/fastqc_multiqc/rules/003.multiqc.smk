@@ -71,6 +71,7 @@ use rule multiqc as irods_complient with:
             "fastq_screen/{sample}.fastq_screen.png",
             sample=design["Sample_id"],
         ),
+        bcl_xml="RunInfo.xml",
         bcl_json="Stats.json"
     output:
         "output/multiqc.html",
@@ -89,6 +90,7 @@ by
 """
 rule unzip_stats:
     output:
+        temp("RunInfo.xml"),
         temp("Stats.json")
     threads: 1
     resources:

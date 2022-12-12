@@ -11,7 +11,10 @@ if [ -n "$(find input/*/archive/*/unaligned/Stats/ -name "Stats.json.zip" | head
 else
     echo "Stats not found"
     # Classic case, must fit demux-like behaviour
-    bash "${script_dir}/run.sh" fastqc_multiqc -p demux "$@"
+    mkdir -p input/tmp_stats/archive/tmp_stats/unaligned/Stats/
+    echo "[]" > Stats.json
+    zip input/tmp_stats/archive/tmp_stats/unaligned/Stats/Stats.json.zip Stats.json 
+    bash "${script_dir}/run.sh" fastqc_multiqc -p demux output/multiqc.html "$@"
     if [ -d "multiqc" ] ; then 
         mv --verbose multiqc output
     fi
